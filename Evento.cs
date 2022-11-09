@@ -24,7 +24,7 @@ public class Evento
         set
         {
             if (_titolo == null || _titolo == "")   
-                throw new ArgumentNullException("il campo non può essere vuoto");
+                throw new Exception();
            
             
                 _titolo = value;
@@ -41,15 +41,12 @@ public class Evento
         set
         {
             if (_dataevento < DateTime.Today)
-            {
-                //Console.WriteLine("non puoi inserire una data passata");
-                throw new Exception("non puoi inserire una data passata");
+            
+                throw new Exception(); 
+            
 
-            } 
-            else 
-            {
                 _dataevento = value;
-            }
+            
         }
     }
 
@@ -64,7 +61,7 @@ public class Evento
         private set 
         { 
             if(_capienzaEvento < 0)
-                throw new EventoException("Deve essere positivo");
+                throw new Exception();
             
             _capienzaEvento = value;
             
@@ -88,7 +85,7 @@ public class Evento
     public int PrenotaPosti(int postiPrenotati) 
     {
         //PrenotaPosti: aggiunge i posti passati come parametro ai posti prenotati.Se
-        if (Data > DateTime.Now || postiPrenotati > CapienzaEvento)
+        if (Data < DateTime.Now || postiPrenotati > CapienzaEvento)
             throw new Exception("errore");
         
 
@@ -97,14 +94,19 @@ public class Evento
         
     }
 
+    public int DisponibilitàPosti(int postidisponibili)
+    {
+        int postiPrenotati = PrenotaPosti(postidisponibili);
 
+        return CapienzaEvento - postiPrenotati;
+    }
 
  
 
     public int DisdiciPosti(int postiDisdetti)
     {
         //permette di disdire i posti prenotati
-        if (Data > DateTime.Now || postiDisdetti > NumeroPostiPrenotati)
+        if (Data < DateTime.Now || postiDisdetti > NumeroPostiPrenotati)
             throw new Exception("errore");
         
         return NumeroPostiPrenotati - postiDisdetti;

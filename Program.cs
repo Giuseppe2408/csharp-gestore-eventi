@@ -30,14 +30,14 @@ try
 {
      nuovoEvento = new Evento(titoloEvento, dataEvento, capienzaEvento);
 }
-catch (ArgumentNullException)
+catch (Exception)
 {
-    Console.WriteLine("questo non può essere null");
+    Console.WriteLine("errore");
 }
-catch (EventoException)
-{
-    Console.WriteLine("deve essere maggiore di 0");
-}
+//catch (EventoException)
+//{
+//    Console.WriteLine("deve essere maggiore di 0");
+//}
 
 
 Console.WriteLine();
@@ -46,4 +46,26 @@ Console.WriteLine("dettagli evento:");
 
 Console.WriteLine();
 
-//Console.WriteLine(nuovoEvento.ToString());
+Console.WriteLine(nuovoEvento.ToString());
+
+Console.WriteLine();
+
+Console.WriteLine("quanti posti vuoi prenotare?");
+
+int postidaPrenotare = Convert.ToInt32(Console.ReadLine());
+
+int postiPrenotati = 0;
+try
+{
+    postiPrenotati = nuovoEvento.PrenotaPosti(postidaPrenotare);
+} catch (Exception)
+{
+    Console.WriteLine("errore");
+}
+
+Console.WriteLine("posti prenotati: " + postiPrenotati);
+Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiPrenotati));
+
+
+Console.WriteLine();
+Console.WriteLine("vuoi disdire dei posti?");
