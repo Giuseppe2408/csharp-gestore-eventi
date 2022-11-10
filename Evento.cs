@@ -25,17 +25,16 @@ public class Evento
         }
         set
         {
-            //if (Titolo == null || Titolo == "")
-            //{
-            //    throw new ArgumentNullException("inserisci un formato valido");
-                
-            //}
-            //else
-            //{
-                //throw new ArgumentNullException("inserisci un formato valido");
+            if (value == null || value == "")
+            {
+                throw new ArgumentNullException("inserisci un formato valido");
+
+            }
+            else
+            {
                 _titolo = value;
-            //}
-            
+            }
+
         }
     }
 
@@ -47,16 +46,16 @@ public class Evento
         }
         set
         {
-            //if (Data < DateTime.Today)
-            //{
+            if (value < DateTime.Today)
+            {
 
-            //    throw new Exception("non puoi inserire una data passata");
-            //}
-            //else
-            //{
+                throw new Exception("non puoi inserire una data passata");
+            }
+            else
+            {
 
                 _dataevento = value;
-            //}
+            }
         }
     }
 
@@ -70,18 +69,18 @@ public class Evento
 
         private set 
         {
-            //if (CapienzaEvento < 0)
-            //{
-            //    throw new EventoException("iserisci un numero positivo");
-            //} 
-            //else
-            //{
+            if (value < 0)
+            {
+                throw new EventoException("iserisci un numero positivo");
+            }
+            else
+            {
                 _capienzaEvento = value;
-            //}
-            
-            
-            
-        } 
+            }
+
+
+
+        }
     }
     public int NumeroPostiPrenotati { get; private set; }
 
