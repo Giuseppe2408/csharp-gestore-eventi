@@ -13,6 +13,7 @@ public class Evento
     int _numeroposti;
     int _postiDisdetti;
     DateTime _dataevento;
+    int _postiDisponibili;
     //ai setters inserire gli opportuni controlli in modo che la data non sia già passata, che il titolo
     //non sia vuoto e che la capienza massima di posti sia un numero positivo.In caso contrario
     //sollevare opportune eccezioni.
@@ -84,6 +85,18 @@ public class Evento
     }
     public int NumeroPostiPrenotati { get; private set; }
 
+    public int PostiDisponibili
+    {
+        get
+        {
+            return _postiDisponibili = CapienzaEvento - NumeroPostiPrenotati;    
+        }
+ 
+}    
+            
+            
+            
+
     public Evento()
     {
 
@@ -102,32 +115,32 @@ public class Evento
         //PrenotaPosti: aggiunge i posti passati come parametro ai posti prenotati.Se
         if (Data < DateTime.Today || postiPrenotati > CapienzaEvento)
             throw new Exception("errore");
-        
 
-        return _numeroposti = NumeroPostiPrenotati + postiPrenotati;
+
+        return NumeroPostiPrenotati = NumeroPostiPrenotati + postiPrenotati;
         
         
     }
 
-    public int DisponibilitàPosti(int postidisponibili)
-    {
-        int postiPrenotati = PrenotaPosti(postidisponibili);
-        int postiDisponibili = 0;
-        if (_postiDisdetti == 0) 
-            return postiDisponibili = CapienzaEvento - postiPrenotati;
+    //public int DisponibilitàPosti(int postidisponibili)
+    //{
+    //    int postiPrenotati = PrenotaPosti(postidisponibili);
+    //    int postiDisponibili = 0;
+    //    if (_postiDisdetti == 0) 
+    //        return postiDisponibili = CapienzaEvento - postiPrenotati;
 
-        return postiDisponibili + _postiDisdetti;
-    }
+    //    return postiDisponibili + _postiDisdetti;
+    //}
 
  
 
     public int DisdiciPosti(int postiDisdetti)
     {
         //permette di disdire i posti prenotati
-        if (Data < DateTime.Today || postiDisdetti > _numeroposti)
+        if (Data < DateTime.Today || postiDisdetti > NumeroPostiPrenotati)
             throw new Exception("errore");
         
-        return _numeroposti - postiDisdetti;
+        return NumeroPostiPrenotati = NumeroPostiPrenotati - postiDisdetti; 
        
     }
 

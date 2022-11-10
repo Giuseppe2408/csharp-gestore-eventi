@@ -70,7 +70,7 @@ catch (Exception e)
 }
 
 Console.WriteLine("posti prenotati: " + postiPrenotati);
-Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiPrenotati));
+Console.WriteLine("posti disponibili: " + nuovoEvento.PostiDisponibili);
 
 
 Console.WriteLine();
@@ -94,22 +94,22 @@ switch (sceltaUtente)
 
         }
         Console.WriteLine();
-        Console.WriteLine("posti prenotati {0} posti", postiDisdetti);
-        Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiDisdetti));
+        Console.WriteLine("posti disdetti {0} posti", postidaDisdire);
+        Console.WriteLine("posti disponibili: " + nuovoEvento.PostiDisponibili);
         break;
 
     case "no":
         Console.WriteLine();
         Console.WriteLine("ok vabene");
         Console.WriteLine();
-        Console.WriteLine("posti prenotati: " + postiPrenotati);
-        Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiPrenotati));
+        Console.WriteLine("posti prenotati: {0} posti " , postiPrenotati);
+        Console.WriteLine("posti disponibili: " + nuovoEvento.PostiDisponibili);
         break;
 
 }
 
 
-Console.Clear();
+//Console.Clear();
 Console.WriteLine("vuoi creare un programma di eventi?");
 string sceltaCreazioneProgramma = Console.ReadLine();   
 
@@ -186,7 +186,7 @@ switch (sceltaCreazioneProgramma)
         ProgrammaEvento.StampaLista(listaEventiData);
 
         //4.Eliminate tutti gli eventi dal vostro programma. 
-        programmaEvento.SvuotaLista(programmaEvento.Eventi);
+        //programmaEvento.SvuotaLista(programmaEvento.Eventi);
 
         break;
     case "no":
@@ -194,5 +194,12 @@ switch (sceltaCreazioneProgramma)
         break;
 }
 
-//Chiedete poi al vostro utente quanti eventi vuole aggiungere, e fategli inserire ad uno ad uno
-//tutti gli eventi necessari chiedendo man mano tutte le informazioni richieste all’utente.
+
+//A questo punto provate ad aggiungere al vostro programma oltre che dei semplici 
+//eventi anche delle e vere e proprie conferenze (potete fare a meno di svuotare la lista 
+//precedentemente creata, commentando il metodo svuota Lista di Eventi).  
+//A questo punto se provate a stampare la vostra lista di eventi con l’apposito metodo 
+//che avete fatto nella classe Evento, se lo avete fatto bene avvalendovi del ToString() 
+//per stampare gli eventi, noterete come il metodo ToString() di Evento e di Conferenza 
+//vengono correttamente chiamati a seconda che nel programma eventi ci sia un evento 
+//normale o una conferenza. 
