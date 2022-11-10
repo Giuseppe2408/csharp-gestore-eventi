@@ -49,7 +49,7 @@ public class Evento
             if (value < DateTime.Today)
             {
 
-                throw new Exception("non puoi inserire una data passata");
+                throw new DataException("non puoi inserire una data passata");
             }
             else
             {

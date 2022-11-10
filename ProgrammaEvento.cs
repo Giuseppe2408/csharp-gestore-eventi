@@ -31,24 +31,26 @@ public class ProgrammaEvento
 
     public List<Evento> RestituisciEventi(DateTime data)
     {
+        List<Evento> eventiData = new List<Evento>();
         foreach (Evento evento in Eventi)
         {
-            evento.Data = data;
+            if (evento.Data == data)
+            {
+                eventiData.Add(evento);
+            }
         }
 
-        return Eventi;
+        return eventiData;
     }
     //● un metodo statico che si occupa, presa una lista di eventi, di stamparla in Console, o
     //ancora meglio vi restituisca la rappresentazione in stringa della vostra lista di eventi.
-    public static string StampaLista(List<Evento> eventi)
+
+    public static void StampaLista(List<Evento> eventi)
     {
-        string listaEventi = "";
         foreach (Evento evento in eventi)
         {
-             listaEventi = evento.ToString();
+            Console.WriteLine(evento);
         }
-
-        return listaEventi;
     }
 
 
@@ -85,15 +87,17 @@ public class ProgrammaEvento
     //data3 - titolo3
     public string ListaEventi()
     {
-        string listaStringhe = "";
+        string lista = Titolo;
+
 
         foreach (Evento evento in Eventi)
         {
-            listaStringhe = evento.Titolo + " " + evento.Data.ToString();
+            lista = lista + "\n " + evento.ToString();  
+
         }
 
+        return lista;
 
-        return Titolo + "\n" + " " + listaStringhe + "\n";
     }
    
 
