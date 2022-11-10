@@ -10,6 +10,8 @@ public class Evento
 {
     string _titolo;
     int _capienzaEvento;
+    int _numeroposti;
+    int _postiDisdetti;
     DateTime _dataevento;
     //ai setters inserire gli opportuni controlli in modo che la data non sia già passata, che il titolo
     //non sia vuoto e che la capienza massima di posti sia un numero positivo.In caso contrario
@@ -23,11 +25,16 @@ public class Evento
         }
         set
         {
-            if (_titolo == null || _titolo == "")   
-                throw new Exception();
-           
-            
+            //if (Titolo == null || Titolo == "")
+            //{
+            //    throw new ArgumentNullException("inserisci un formato valido");
+                
+            //}
+            //else
+            //{
+                //throw new ArgumentNullException("inserisci un formato valido");
                 _titolo = value;
+            //}
             
         }
     }
@@ -40,13 +47,16 @@ public class Evento
         }
         set
         {
-            if (_dataevento < DateTime.Today)
-            
-                throw new Exception(); 
-            
+            //if (Data < DateTime.Today)
+            //{
+
+            //    throw new Exception("non puoi inserire una data passata");
+            //}
+            //else
+            //{
 
                 _dataevento = value;
-            
+            //}
         }
     }
 
@@ -59,11 +69,17 @@ public class Evento
         }
 
         private set 
-        { 
-            if(_capienzaEvento < 0)
-                throw new Exception();
+        {
+            //if (CapienzaEvento < 0)
+            //{
+            //    throw new EventoException("iserisci un numero positivo");
+            //} 
+            //else
+            //{
+                _capienzaEvento = value;
+            //}
             
-            _capienzaEvento = value;
+            
             
         } 
     }
@@ -76,20 +92,20 @@ public class Evento
 
     public Evento(string titolo, DateTime dataevento, int capienzaEvento)
     {
-        _titolo = titolo;
-        _dataevento = dataevento;
-        _capienzaEvento = capienzaEvento;
+        Titolo = titolo;
+        Data = dataevento;
+        CapienzaEvento = capienzaEvento;
         NumeroPostiPrenotati = 0;
     }
 
     public int PrenotaPosti(int postiPrenotati) 
     {
         //PrenotaPosti: aggiunge i posti passati come parametro ai posti prenotati.Se
-        if (Data < DateTime.Now || postiPrenotati > CapienzaEvento)
+        if (Data < DateTime.Today || postiPrenotati > CapienzaEvento)
             throw new Exception("errore");
         
 
-        return NumeroPostiPrenotati + postiPrenotati;
+        return _numeroposti = NumeroPostiPrenotati + postiPrenotati;
         
         
     }
@@ -97,8 +113,11 @@ public class Evento
     public int DisponibilitàPosti(int postidisponibili)
     {
         int postiPrenotati = PrenotaPosti(postidisponibili);
+        int postiDisponibili = 0;
+        if (_postiDisdetti == 0) 
+            return postiDisponibili = CapienzaEvento - postiPrenotati;
 
-        return CapienzaEvento - postiPrenotati;
+        return postiDisponibili + _postiDisdetti;
     }
 
  
@@ -106,10 +125,10 @@ public class Evento
     public int DisdiciPosti(int postiDisdetti)
     {
         //permette di disdire i posti prenotati
-        if (Data < DateTime.Now || postiDisdetti > NumeroPostiPrenotati)
+        if (Data < DateTime.Today || postiDisdetti > _numeroposti)
             throw new Exception("errore");
         
-        return NumeroPostiPrenotati - postiDisdetti;
+        return _numeroposti - postiDisdetti;
        
     }
 

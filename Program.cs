@@ -30,10 +30,18 @@ try
 {
      nuovoEvento = new Evento(titoloEvento, dataEvento, capienzaEvento);
 }
-catch (Exception)
+catch (ArgumentNullException e)
 {
-    Console.WriteLine("errore");
+    Console.WriteLine(e.Message);
 }
+catch (EventoException e)
+{
+    Console.WriteLine(e.Message);
+}
+//catch (Exception e)
+//{
+//    Console.WriteLine(e.Message);
+//}
 //catch (EventoException)
 //{
 //    Console.WriteLine("deve essere maggiore di 0");
@@ -58,9 +66,9 @@ int postiPrenotati = 0;
 try
 {
     postiPrenotati = nuovoEvento.PrenotaPosti(postidaPrenotare);
-} catch (Exception)
+} catch (Exception e)
 {
-    Console.WriteLine("errore");
+    Console.WriteLine(e.Message);
 }
 
 Console.WriteLine("posti prenotati: " + postiPrenotati);
@@ -69,3 +77,41 @@ Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiP
 
 Console.WriteLine();
 Console.WriteLine("vuoi disdire dei posti?");
+string sceltaUtente = Console.ReadLine();
+
+switch (sceltaUtente)
+{
+    case "si":
+        Console.WriteLine("inserisci il numero dei posti da disdire");
+        int postidaDisdire = Convert.ToInt32(Console.ReadLine());
+        int postiDisdetti = 0;
+        try
+        {
+            postiDisdetti = nuovoEvento.DisdiciPosti(postidaDisdire);
+        } catch (Exception e)
+        {
+            Console.WriteLine();
+            Console.WriteLine(e.Message);
+            Console.WriteLine("re-inserisci posti da disdire");
+            postidaDisdire = Convert.ToInt32(Console.ReadLine());
+
+        }
+        Console.WriteLine();
+        Console.WriteLine("posti prenotati {0} posti", postiDisdetti);
+        Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiDisdetti));
+        break;
+
+    case "no":
+        Console.WriteLine();
+        Console.WriteLine("ok vabene");
+        Console.WriteLine();
+        Console.WriteLine("posti prenotati: " + postiPrenotati);
+        Console.WriteLine("posti disponibili: " + nuovoEvento.DisponibilitàPosti(postiPrenotati));
+        break;
+
+}
+
+public class ProgrammaEvento : Evento
+{
+    List<Evento> ListaEventi { get; set; }
+}
